@@ -1,23 +1,25 @@
-import logo from './logo.svg';
+import React, { useEffect, useRef } from 'react';
 import './App.css';
 
+
 function App() {
-  return (
+  // const videoRef = useRef(null);
+  // const canvasRef = useRef(null);
+
+  const videoRef = useRef(null);
+  
+    useEffect(() => {
+        videoRef.current?.play();
+    }, []);
+
+    return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      {/*  <Webcamera webcamRef={webcamRef}/>
+        <Canvas canvasRef={canvasRef} /> */}
+   
+        <video controls muted ref={videoRef} height='400' width='400'>
+          <source src="IMG_3469.MOV" type="video/mov"></source>
+        </video>
     </div>
   );
 }
