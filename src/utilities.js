@@ -75,7 +75,7 @@
    return [y, x];
  }
  
- export function drawPoint(ctx, y, x, r, color) {
+export function drawPoint(ctx, y, x, r, color) {
    ctx.beginPath();
    ctx.arc(x, y, r, 0, 2 * Math.PI);
    ctx.fillStyle = color;
@@ -97,7 +97,7 @@
  /**
   * Draws a pose skeleton by looking up all adjacent keypoints/joints
   */
- export function drawSkeleton(keypoints, minConfidence, ctx, scale = 1) {
+ export const drawSkeleton = (keypoints, minConfidence, ctx, scale = 0.3)=>{
    const adjacentKeyPoints =
        posenet.getAdjacentKeyPoints(keypoints, minConfidence);
  
@@ -111,19 +111,17 @@
  /**
   * Draw pose keypoints onto a canvas
   */
- export function drawKeypoints(keypoints, minConfidence, ctx, scale = 1) {
-   for (let i = 0; i < keypoints.length; i++) {
+export const drawKeypoints = (keypoints, minConfidence, ctx, scale = 0.3) => {
+     for (let i = 0; i < keypoints.length; i++) {
      const keypoint = keypoints[i];
- 
-     if (keypoint.score < minConfidence) {
+     if ( keypoint.score < minConfidence ) {
        continue;
      }
- 
     //  const {y, x} = keypoint.position;
     const {y, x} = keypoint;
      drawPoint(ctx, y * scale, x * scale, 3, color);
    }
- }
+} 
  
  /**
   * Draw the bounding box of a pose. For example, for a whole person standing
